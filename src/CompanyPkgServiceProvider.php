@@ -17,6 +17,7 @@ class CompanyPkgServiceProvider extends ServiceProvider {
 		$this->loadViewsFrom(__DIR__ . '/views', 'company-pkg');
 		$this->publishes([
 			__DIR__ . '/public' => base_path('public'),
+			__DIR__ . '/database/seeds/client' => 'database/seeds',
 		]);
 	}
 

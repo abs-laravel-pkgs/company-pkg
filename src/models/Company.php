@@ -19,9 +19,11 @@ class Company extends Model {
 		'code',
 		'name',
 		'address_id',
-		'logo_id',
+		// 'logo_id',
 		'contact_number',
 		'email',
+		'theme',
+		'domain',
 		'created_by_id',
 		'updated_by_id',
 		'deleted_by_id',
@@ -33,6 +35,10 @@ class Company extends Model {
 			dd('Default admin not found');
 		}
 		return $admin;
+	}
+
+	public function adddress() {
+		return $this->hasOne('Abs\Basic\Address');
 	}
 
 	public static function createFromObject($record_data, $company = null) {

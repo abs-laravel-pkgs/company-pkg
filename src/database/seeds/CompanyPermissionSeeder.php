@@ -28,11 +28,17 @@ class CompanyPermissionSeeder extends Seeder {
 			[
 				'display_order' => 2,
 				'parent' => 'companies',
-				'name' => 'delete-company',
+				'name' => 'edit-company',
 				'display_name' => 'Edit',
 			],
 			[
 				'display_order' => 3,
+				'parent' => 'companies',
+				'name' => 'view-company',
+				'display_name' => 'View',
+			],
+			[
+				'display_order' => 4,
 				'parent' => 'companies',
 				'name' => 'delete-company',
 				'display_name' => 'Delete',

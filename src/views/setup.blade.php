@@ -5,9 +5,9 @@
 @endif
 
 <script type="text/javascript">
-    var company_list_template_url = "{{URL::asset($company_pkg_prefix.'/public/angular/company-pkg/pages/company/list.html')}}";
-    var company_get_form_data_url = "{{url('company-pkg/company/get-form-data/')}}";
-    var company_form_template_url = "{{URL::asset($company_pkg_prefix.'/public/angular/company-pkg/pages/company/form.html')}}";
-    var company_delete_data_url = "{{url('company-pkg/company/delete/')}}";
+	var admin_theme = "{{$theme}}";
+    var company_list_template_url = "{{asset($company_pkg_prefix.'/public/themes/'.$theme.'/company-pkg/company/list.html')}}";
+    var company_form_template_url = "{{asset($company_pkg_prefix.'/public/themes/'.$theme.'/company-pkg/company/form.html')}}";
+    var company_view_template_url = "{{asset($company_pkg_prefix.'/public/themes/'.$theme.'/company-pkg/company/view.html')}}";
 </script>
-<script type="text/javascript" src="{{URL::asset($company_pkg_prefix.'/public/angular/company-pkg/pages/company/controller.js?v=2')}}"></script>
+<script type="text/javascript" src="{{asset($company_pkg_prefix.'/public/themes/'.$theme.'/company-pkg/company/controller.js?v=2')}}"></script>

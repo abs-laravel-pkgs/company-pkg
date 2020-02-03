@@ -149,7 +149,7 @@ app.component('companyList', {
 //------------------------------------------------------------------------------------------------------------------------
 app.component('companyForm', {
     templateUrl: company_form_template_url,
-    controller: function($http, $location, HelperService, $scope, $routeParams, $rootScope) {
+    controller: function($http, $location, HelperService, $scope, $routeParams, $rootScope, $element) {
         var self = this;
         self.hasPermission = HelperService.hasPermission;
         self.angular_routes = angular_routes;
@@ -161,7 +161,7 @@ app.component('companyForm', {
                 }
             }
         ).then(function(response) {
-            console.log(response);
+            console.log(response.data);
             self.company = response.data.company;
             self.address = response.data.address;
             self.attachment = response.data.attachment;
@@ -178,7 +178,7 @@ app.component('companyForm', {
                     self.switch_value = 'Active';
                 }
                 if (self.attachment) {
-                    // $scope.SelectFile(self.attachment.name);
+                    $scope.PreviewImage = 'public/themes/' + self.theme + '/img/company_logo/' + self.attachment.name;
                     $('#edited_file_name').val(self.attachment.name);
                 } else {
                     $('#edited_file_name').val('');
@@ -189,6 +189,17 @@ app.component('companyForm', {
                 self.city_list = [{ 'id': '', 'name': 'Select City' }];
             }
         });
+
+        //MD-SELECT SEARCH
+        $element.find('input').on('keydown', function(ev) {
+            ev.stopPropagation();
+        });
+        $scope.clearSearchTerm = function() {
+            $scope.searchTerm = '';
+            $scope.searchTerm1 = '';
+            $scope.searchTerm2 = '';
+        };
+
 
         /* Tab Funtion */
         $('.btn-nxt').on("click", function() {
@@ -205,15 +216,14 @@ app.component('companyForm', {
         $scope.btnNxt = function() {}
         $scope.prev = function() {}
 
-        // $scope.SelectFile = function(e) {
-        //     console.log(e);
-        //     var reader = new FileReader();
-        //     reader.onload = function(e) {
-        //         $scope.PreviewImage = e.target.result;
-        //         $scope.$apply();
-        //     };
-        //     reader.readAsDataURL(e.target.files[0]);
-        // };
+        $scope.SelectFile = function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $scope.PreviewImage = e.target.result;
+                $scope.$apply();
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        };
 
         //SELECT STATE BASED COUNTRY
         $scope.onSelectedCountry = function(id) {
@@ -291,7 +301,8 @@ app.component('companyForm', {
                         } else {
                             return true;
                         }
-                    }
+                    },
+                    extension: "jpg|jpeg|png|ico|bmp|svg|gif",
                 },
                 'theme': {
                     required: true,
@@ -324,6 +335,11 @@ app.component('companyForm', {
                     minlength: 6,
                     maxlength: 6,
                 },
+            },
+            messages: {
+                'logo_id': {
+                    extension: "Accept Image Files Only. Eg: jpg,jpeg,png,ico,bmp,svg,gif"
+                }
             },
             invalidHandler: function(event, validator) {
                 custom_noty('error', 'You have errors,Please check all tabs');
@@ -364,5 +380,44 @@ app.component('companyForm', {
                     });
             }
         });
+    }
+});
+//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
+app.component('companyView', {
+    templateUrl: company_view_template_url,
+    controller: function($http, HelperService, $scope, $routeParams, $rootScope) {
+        var self = this;
+        self.hasPermission = HelperService.hasPermission;
+        self.angular_routes = angular_routes;
+        $http.get(
+            laravel_routes['viewCompany'], {
+                params: {
+                    id: $routeParams.id,
+                }
+            }
+        ).then(function(response) {
+            console.log(response);
+            self.company = response.data.company;
+            self.address = response.data.address;
+            self.action = response.data.action;
+            self.attachment = response.data.attachment;
+            self.theme = response.data.theme;
+        });
+
+        /* Tab Funtion */
+        $('.btn-nxt').on("click", function() {
+            $('.editDetails-tabs li.active').next().children('a').trigger("click");
+            tabPaneFooter();
+        });
+        $('.btn-prev').on("click", function() {
+            $('.editDetails-tabs li.active').prev().children('a').trigger("click");
+            tabPaneFooter();
+        });
+        $('.btn-pills').on("click", function() {
+            tabPaneFooter();
+        });
+        $scope.btnNxt = function() {}
+        $scope.prev = function() {}
     }
 });

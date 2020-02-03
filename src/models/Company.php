@@ -37,10 +37,6 @@ class Company extends Model {
 		return $admin;
 	}
 
-	public function adddress() {
-		return $this->hasOne('Abs\Basic\Address');
-	}
-
 	public static function createFromObject($record_data, $company = null) {
 		$record = self::firstOrNew([
 			'id' => $record_data->id,

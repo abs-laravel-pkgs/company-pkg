@@ -68,7 +68,7 @@
                                                                 <input type="text" class="form-control" id="edited_file_name" readonly placeholder="Browse Logo">
                                                                 <span class="input-group-btn">
                                                                     <span class="btn btn-primary">
-                                                                        <input type="file" name="logo_id" class="form-control required" placeholder="Enter Logo" accept="image/*"><!-- onchange="angular.element(this).scope().SelectFile(event)">-->
+                                                                        <input type="file" name="logo_id" class="form-control required" placeholder="Enter Logo" accept="image/*" onchange="angular.element(this).scope().SelectFile(event)">
                                                                         <img src="public/themes/{{$ctrl.theme}}/img/content/file-bg.svg">
                                                                     </span>
                                                                 </span>
@@ -76,12 +76,12 @@
                                                         </div>
                                                         <span id="attachment_error"></span>
                                                     </div>
-                                                    <!-- <div class="col-md-3">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="opacity-0">1<span class="mandatory"></span></label>
-                                                            <img ng-src="{{PreviewImage}}" ng-show="PreviewImage != null" alt="" style="height:50px;width:50px" />
+                                                            <img ng-src="{{PreviewImage}}" ng-show="PreviewImage != null" alt="" style="width:50px" />
                                                         </div>
-                                                    </div> -->
+                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3">
@@ -162,12 +162,12 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <lable>State<span class="mandatory">*</span></lable>
-                                                            <md-select ng-model="$ctrl.address.state_id" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-change="onSelectedState($ctrl.address.state_id)" placeholder="Select State">
+                                                            <md-select ng-model="$ctrl.address.state_id" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-change="onSelectedState($ctrl.address.state_id);$ctrl.address.city_id='';" placeholder="Select State">
                                                                 <md-select-header class="demo-select-header">
-                                                                    <input ng-model="searchTerm" type="search" placeholder="Search for a State" class="demo-header-searchbox md-text">
+                                                                    <input ng-model="searchTerm1" type="search" placeholder="Search for a State" class="demo-header-searchbox md-text">
                                                                 </md-select-header>
                                                                 <md-optgroup>
-                                                                    <md-option ng-value="state.id" ng-repeat="state in $ctrl.state_list | filter:searchTerm">{{state.name}}</md-option>
+                                                                    <md-option ng-value="state.id" ng-repeat="state in $ctrl.state_list | filter:searchTerm1">{{state.name}}</md-option>
                                                                 </md-optgroup>
                                                             </md-select>
                                                             <input type="hidden" class="form-control required" name="state_id" id="state_id" value="{{$ctrl.address.state_id}}">
@@ -180,10 +180,10 @@
                                                             <lable>City<span class="mandatory">*</span></lable>
                                                             <md-select ng-model="$ctrl.address.city_id" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" placeholder="Select City">
                                                                 <md-select-header class="demo-select-header">
-                                                                    <input ng-model="searchTerm" type="search" placeholder="Search for a City" class="demo-header-searchbox md-text">
+                                                                    <input ng-model="searchTerm2" type="search" placeholder="Search for a City" class="demo-header-searchbox md-text">
                                                                 </md-select-header>
                                                                 <md-optgroup>
-                                                                    <md-option ng-value="city.id" ng-repeat="city in $ctrl.city_list | filter:searchTerm">{{city.name}}</md-option>
+                                                                    <md-option ng-value="city.id" ng-repeat="city in $ctrl.city_list | filter:searchTerm2">{{city.name}}</md-option>
                                                                 </md-optgroup>
                                                             </md-select>
                                                             <input type="hidden" class="form-control required" name="city_id" id="city_id" value="{{$ctrl.address.city_id}}">

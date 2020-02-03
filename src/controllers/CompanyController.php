@@ -126,6 +126,16 @@ class CompanyController extends Controller {
 		return response()->json($this->data);
 	}
 
+	public function viewCompany(Request $request) {
+		$this->data['company'] = Company::withTrashed()->where('id', $request->id)->first();
+		$this->data['address'] = Address::with(['country', 'state', 'city'])->where('entity_id', $request->id)->where('address_of_id', 60)->first();
+		$this->data['attachment'] = Attachment::where('entity_id', $request->id)->where('attachment_of_id', 21)->first();
+		$this->data['theme'];
+		$this->data['action'] = 'View';
+
+		return response()->json($this->data);
+	}
+
 	public function saveCompany(Request $request) {
 		// dd($request->all());
 		try {
@@ -170,6 +180,7 @@ class CompanyController extends Controller {
 					'min:3',
 					'unique:companies,code,' . $request->id . ',id',
 				],
+				'logo_id' => 'mimes:jpeg,jpg,png,gif,ico,bmp,svg|nullable|max:10000',
 				'contact_number' => 'required|max:16|min:10',
 				'email' => 'required|max:64',
 				'theme' => 'required|max:64',
@@ -211,17 +222,23 @@ class CompanyController extends Controller {
 				if (!File::exists(public_path() . '/themes/' . config('custom.admin_theme') . '/img/company_logo')) {
 					File::makeDirectory(public_path() . '/themes/' . config('custom.admin_theme') . '/img/company_logo', 0777, true);
 				}
+
+				$attacement = $request->logo_id;
 				$remove_previous_attachment = Attachment::where([
-					'entity_id' => $company->id,
+					'entity_id' => $request->id,
 					'attachment_of_id' => 21,
 				])->first();
 				if (!empty($remove_previous_attachment)) {
 					$remove = $remove_previous_attachment->forceDelete();
+					$img_path = public_path() . '/themes/' . config('custom.admin_theme') . '/img/company_logo/' . $remove_previous_attachment->name;
+					if (File::exists($img_path)) {
+						File::delete($img_path);
+					}
 				}
-				$attacement = $request->logo_id;
-				$random_file_name = $company->id . '_company_logo_file.';
+				$random_file_name = $company->id . '_company_logo_file_' . rand(0, 1000) . '.';
 				$extension = $attacement->getClientOriginalExtension();
 				$attacement->move(public_path() . '/themes/' . config('custom.admin_theme') . '/img/company_logo', $random_file_name . $extension);
+
 				$attachment = new Attachment;
 				$attachment->company_id = Auth::user()->company_id;
 				$attachment->attachment_of_id = 21;
@@ -256,10 +273,11 @@ class CompanyController extends Controller {
 			return response()->json(['success' => false, 'errors' => ['Exception Error' => $e->getMessage()]]);
 		}
 	}
-	public function deleteCompany($id) {
-		$delete_status = Company::withTrashed()->where('id', $id)->forceDelete();
+	public function deleteCompany(Request $request) {
+		$delete_status = Company::withTrashed()->where('id', $request->id)->forceDelete();
 		if ($delete_status) {
-			$address_delete = Address::where('address_of_id', 24)->where('entity_id', $id)->forceDelete();
+			$address_delete = Address::where('address_of_id', 60)->where('entity_id', $request->id)->forceDelete();
+			$attachment_delete = Attachment::where('attachment_of_id', 21)->where('entity_id', $request->id)->forceDelete();
 			return response()->json(['success' => true]);
 		}
 	}

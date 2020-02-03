@@ -32,8 +32,13 @@ class CompanyController extends Controller {
 				DB::raw('COALESCE(companies.logo_id,"--") as logo'),
 				DB::raw('COALESCE(companies.theme,"--") as theme'),
 				'companies.domain',
+				'attachments.name as logo_name',
 				DB::raw('IF(companies.deleted_at IS NULL,"Active","Inactive") as status')
 			)
+			->leftJoin('attachments', function ($query) {
+				$query->on('companies.logo_id', 'attachments.id')
+					->where('attachments.attachment_of_id', 21);
+			})
 			->where(function ($query) use ($request) {
 				if (!empty($request->company_code)) {
 					$query->where('companies.code', 'LIKE', '%' . $request->company_code . '%');
@@ -67,6 +72,10 @@ class CompanyController extends Controller {
 			->addColumn('name', function ($company) {
 				$status = $company->status == 'Active' ? 'green' : 'red';
 				return '<span class="status-indicator ' . $status . '"></span>' . $company->name;
+			})
+			->addColumn('logo', function ($company) {
+				$company_logo = $delete = asset('public/themes/' . $this->data['theme'] . '/img/company_logo/' . $company->logo_name);
+				return '<img src="' . $company_logo . '" alt="' . $company->logo_name . '" style="width:50px;">';
 			})
 			->addColumn('action', function ($company) {
 				$edit = asset('public/themes/' . $this->data['theme'] . '/img/content/table/edit-yellow.svg');

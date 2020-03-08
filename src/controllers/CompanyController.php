@@ -1,8 +1,8 @@
 <?php
 
 namespace Abs\CompanyPkg;
-use Abs\Basic\Address;
-use Abs\Basic\Attachment;
+use Abs\BasicPkg\Address;
+use Abs\BasicPkg\Attachment;
 use Abs\CompanyPkg\Company;
 use Abs\LocationPkg\Country;
 use App\Http\Controllers\Controller;

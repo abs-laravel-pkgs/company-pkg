@@ -79,6 +79,7 @@ class Company extends Model {
 		// $record->address = $faker->address;
 		// $record->cin_number = 'C' . $company_id . 'CIN1';
 		// $record->gst_number = 'C' . $company_id . 'GST1';
+		$record->domain = '';
 		$record->email = $faker->safeEmail;
 		$record->contact_number = $company_id . '0000000001';
 		// $record->reference_code = $record->code;

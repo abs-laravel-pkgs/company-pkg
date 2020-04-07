@@ -1,0 +1,141 @@
+<!--Content Wrap -->
+<div class="content-wrap">
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header-content">
+                        <div class="page-header-inner page-title display-inline-block">
+                            <div class="previous-page">
+                                <a href="#!/company-pkg/company/list"><img src="./public/themes/{{$ctrl.theme}}/img/content/previous.svg" class="img-responsive"></a>
+                            </div>
+                        </div><!-- Page Header Inner -->
+                        <div class="page-header-inner page-title display-inline-block">
+                            <h1 class="title">{{$ctrl.action}} Company</h1>
+                            <p class="subtitle">
+                                <a href="#!/company-pkg/company/list">
+                                    Companies
+                                </a> /
+                                {{$ctrl.action}}
+                            </p>
+                        </div><!-- Page Header Inner -->
+                    </div><!-- Page Header Content -->
+                </div><!-- Col Main -->
+            </div><!-- Row -->
+        </div><!-- Container -->
+    </div><!-- Page Header -->
+    <!-- Page Main Content -->
+    <div class="page-main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-tab-form pb-80">
+                        <div class="tab-form-wrap">
+                            <div class="tab-form-header">
+                                <div class="tab-header">
+                                    <div class="isotope-filters animated" data-animation="fadeInLeft" data-animation-delay="300">
+                                        <ul class="nav nav-pills editDetails-tabs">
+                                            <li class="active"><a data-target="#general-info" role="tab" data-toggle="tab" aria-expanded="true">General Information</a></li>
+                                            <li><a data-target="#address" role="tab" data-toggle="tab" aria-expanded="true">Address</a></li>
+                                        </ul>
+                                    </div><!-- Filters -->
+                                </div><!-- Tab Header -->
+                            </div><!-- Tab Form Header -->
+                            <div class="tab-form-body">
+                                <div class="tab-content">
+                                    <!-- TAB PANEL -->
+                                    <div class="tab-pane fade in active" id="general-info" data-animation="fadeInUp" data-animation-delay="300">
+                                        <div class="tab-pane-wrap">
+                                            <div class="row">
+                                                <ul class="claimed-coupon-list">
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Company Name</span>
+                                                        <span class="info">{{$ctrl.company.name}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Company Code</span>
+                                                        <span class="info">{{$ctrl.company.code}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Logo</span>
+                                                        <span class="info"><img src="public/themes/{{$ctrl.theme}}/img/company_logo/{{$ctrl.attachment.name}}" style="width: 50px;"></span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Contact Number</span>
+                                                        <span class="info">{{$ctrl.company.contact_number}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Email ID</span>
+                                                        <span class="info">{{$ctrl.company.email}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Theme</span>
+                                                        <span class="info">{{$ctrl.company.theme}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Domain</span>
+                                                        <span class="info">{{$ctrl.company.domain}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Active Status</span>
+                                                        <span class="info">{{$ctrl.company.deleted_at ? 'Inactive' : 'Active'}}</span>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- Row -->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="tab-pane-footer text-right">
+                                                        <a class="btn btn-grey btn-nxt">Next</a>
+                                                    </div><!-- Tab Footer -->
+                                                </div>
+                                            </div><!-- Row -->
+                                        </div><!-- Tab Pane Wrap -->
+                                    </div><!-- Tab Pane -->
+                                    <div class="tab-pane fade" id="address" data-animation="fadeInUp" data-animation-delay="300">
+                                        <div class="tab-pane-wrap">
+                                            <div class="row">
+                                                <ul class="claimed-coupon-list">
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Address Line 1</span>
+                                                        <span class="info">{{$ctrl.address.address_line_1}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Address Line 1</span>
+                                                        <span class="info">{{$ctrl.address.address_line_2 ? $ctrl.address.address_line_2 : '--'}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Country</span>
+                                                        <span class="info">{{$ctrl.address.country.name}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">State</span>
+                                                        <span class="info">{{$ctrl.address.state.name}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">City</span>
+                                                        <span class="info">{{$ctrl.address.city.name}}</span>
+                                                    </li>
+                                                    <li class="claimed-coupon-list-item">
+                                                        <span class="label">Pincode</span>
+                                                        <span class="info">{{$ctrl.address.pincode}}</span>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- Row -->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="tab-pane-footer text-right">
+                                                        <a class="btn btn-grey btn-prev">Previous</a>
+                                                    </div><!-- Tab Footer -->
+                                                </div>
+                                            </div><!-- Row -->
+                                        </div><!-- Tab Pane Wrap -->
+                                    </div><!-- Tab Pane -->
+                                </div><!-- Tab Content -->
+                            </div><!-- Tab Form Body -->
+                        </div><!-- Tab Form Wrap -->
+                    </div><!-- Page Tab Form -->
+                </div><!-- Column -->
+            </div><!-- Row -->
+        </div><!-- Container -->
+    </div><!-- Page Main Content -->
+</div><!-- Content Wrap -->

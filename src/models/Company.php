@@ -62,11 +62,6 @@ class Company extends Model {
 	}
 
 	public static function createFromId($company_id) {
-		// $company = self::find($company_id);
-		// if ($company) {
-		// 	dd('Company already exists');
-		// }
-
 		$record = self::firstOrNew([
 			'id' => $company_id,
 		]);
@@ -103,6 +98,7 @@ class Company extends Model {
 		$user->has_mobile_login = 0;
 
 		$user->save();
+
 		$user->roles()->sync([1]);
 		return $user;
 	}

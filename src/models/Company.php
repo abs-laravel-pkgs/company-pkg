@@ -5,7 +5,6 @@ namespace Abs\CompanyPkg;
 use Abs\HelperPkg\Traits\SeederTrait;
 use Abs\UserPkg\User;
 use Faker\Factory as Faker;
-use Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -99,7 +98,7 @@ class Company extends Model {
 		$user->first_name = $this->name;
 		$user->last_name = ' Admin 1';
 		$user->email = $this->code . 'a1@' . $this->code . '.com';
-		$user->password = Hash::make('Test@123'); //'$2y$10$N9pYzAbL2spl7vX3ZE1aBeekppaosAdixk04PTkK5obng7.KsLAQ2'; //
+		$user->password = 'Test@123'; //Hash::make('Test@123'); //'$2y$10$N9pYzAbL2spl7vX3ZE1aBeekppaosAdixk04PTkK5obng7.KsLAQ2'; //
 		$user->mobile_number = $this->id . '000000001';
 		$user->has_mobile_login = 0;
 

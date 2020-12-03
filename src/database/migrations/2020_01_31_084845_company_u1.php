@@ -12,7 +12,11 @@ class CompanyU1 extends Migration {
 	 */
 	public function up() {
 		Schema::table('companies', function (Blueprint $table) {
-			$table->string('domain', 128)->nullable()->after('theme');
+			if (!Schema::hasColumn('companies', 'domain')) {
+				$table->string('domain', 128)
+					->nullable()
+					->after('theme');
+			}
 		});
 	}
 

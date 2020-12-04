@@ -17,8 +17,8 @@ class CompaniesC extends Migration {
 			$table->string('name', 64);
 			$table->unsignedInteger('address_id')->nullable();
 			$table->unsignedInteger('logo_id')->nullable();
-			$table->string('contact_number', 16);
-			$table->string('email', 64);
+			$table->string('contact_number', 16)->nullable();
+			$table->string('email', 64)->nullable();
 			$table->string('theme', 64)->nullable();
 			$table->string('domain', 64)->nullable();
 			$table->unsignedInteger('created_by_id')->nullable();

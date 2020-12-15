@@ -1,31 +1,25 @@
 <?php
 
-namespace Abs\CompanyPkg;
+namespace Abs\CompanyPkg\Models;
 
+use Abs\BasicPkg\Models\BaseModel;
 use Abs\HelperPkg\Traits\SeederTrait;
 use Abs\UserPkg\User;
 use Faker\Factory as Faker;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Company extends Model {
+class Company extends BaseModel {
 	use SeederTrait;
 	use SoftDeletes;
 
 	protected $table = 'companies';
 	protected $fillable = [
-		'id',
 		'code',
 		'name',
-		'address_id',
-		// 'logo_id',
 		'contact_number',
 		'email',
 		'theme',
 		'domain',
-		'created_by_id',
-		'updated_by_id',
-		'deleted_by_id',
 	];
 
 	public function admin() {

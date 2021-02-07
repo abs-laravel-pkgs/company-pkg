@@ -2,6 +2,7 @@
 namespace Abs\CompanyPkg\Traits;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 trait CompanyableTrait {
 	
@@ -17,5 +18,10 @@ trait CompanyableTrait {
 	public function company(): BelongsTo{
 		return $this->belongsTo('App\Company');
 	}
+
+	public function scopeFilterCurrentUserCompany($query) {
+		$query->where('company_id',  Auth::user()->company_id);
+	}
+
 
 }

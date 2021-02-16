@@ -5,6 +5,7 @@ namespace Abs\CompanyPkg\Models;
 use Abs\BasicPkg\Models\BaseModel;
 use Abs\HelperPkg\Traits\SeederTrait;
 use Abs\UserPkg\User;
+use App\Models\Address;
 use Faker\Factory as Faker;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -95,6 +96,10 @@ class Company extends BaseModel {
 
 		$user->roles()->sync([1]);
 		return $user;
+	}
+
+	public function address() {
+		return $this->morphOne(Address::class, 'addressable');
 	}
 
 }

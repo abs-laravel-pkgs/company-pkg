@@ -6,7 +6,9 @@ use Abs\BasicPkg\Models\BaseModel;
 use Abs\HelperPkg\Traits\SeederTrait;
 use Abs\UserPkg\User;
 use App\Models\Address;
+use App\Models\Attachment;
 use Faker\Factory as Faker;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company extends BaseModel {
@@ -22,6 +24,18 @@ class Company extends BaseModel {
 		'theme',
 		'domain',
 	];
+
+	// Relationships --------------------------------------------------------------
+
+	public function logo(): BelongsTo
+	{
+		return $this->belongsTo(Attachment::class, 'logo_id');
+	}
+
+	public function address(): BelongsTo
+	{
+		return $this->belongsTo(Address::class, 'address_id');
+	}
 
 	public function admin() {
 		$admin = User::where('username', $this->code . 'a1')->where('company_id', $this->id)->first();

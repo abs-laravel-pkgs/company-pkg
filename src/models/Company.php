@@ -112,8 +112,8 @@ class Company extends BaseModel {
 		return $user;
 	}
 
-	public function address() {
-		return $this->morphOne(Address::class, 'addressable');
-	}
-
+	//public function address() {
+	//	return $this->morphOne(Address::class, 'addressable');
+	//}
+	//
 }

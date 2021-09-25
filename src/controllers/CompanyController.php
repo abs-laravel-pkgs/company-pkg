@@ -5,7 +5,7 @@ use Abs\BasicPkg\Address;
 use Abs\BasicPkg\Attachment;
 use Abs\CompanyPkg\Company;
 use Abs\LocationPkg\Country;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Core\BaseController;
 use Auth;
 use Carbon\Carbon;
 use DB;
@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Yajra\Datatables\Datatables;
 
-class CompanyController extends Controller {
+class CompanyController extends BaseController {
 
 	public function __construct() {
 		$this->data['theme'] = config('custom.admin_theme');

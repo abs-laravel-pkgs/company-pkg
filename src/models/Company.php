@@ -116,4 +116,30 @@ class Company extends BaseModel {
 	//	return $this->morphOne(Address::class, 'addressable');
 	//}
 	//
+
+	// Relationships to auto load
+	public static function relationships($action = '', $format = ''): array
+	{
+		$relationships = [];
+
+		if ($action === 'index') {
+			$relationships = array_merge($relationships, [
+				//'billingAddress',
+				//'paymentMode',
+				//'status',
+			]);
+		} elseif ($action === 'read') {
+			$relationships = array_merge($relationships, [
+				'logo',
+				'address',
+				'defaultCountry',
+			]);
+		} elseif ($action === 'options') {
+			$relationships = array_merge($relationships, [
+			]);
+		}
+
+		return $relationships;
+	}
+
 }

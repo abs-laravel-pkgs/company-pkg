@@ -2,7 +2,7 @@
 
 namespace Abs\CompanyPkg;
 use Abs\BasicPkg\Address;
-use Abs\BasicPkg\Attachment;
+use Abs\BasicPkg\Models\Attachment;
 use Abs\CompanyPkg\Company;
 use Abs\LocationPkg\Country;
 use App\Http\Controllers\Core\BaseController;
